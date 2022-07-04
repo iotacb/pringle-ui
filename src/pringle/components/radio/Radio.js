@@ -11,17 +11,20 @@ function Radio({
 	assetLeft,
 	assetRight,
 	checked,
-	style
+	style,
 }) {
 	const theme = useTheme();
 
 	return (
-		<RadioContainer
-			style={style}
-			theme={theme}
-		>
+		<RadioContainer style={style} theme={theme}>
 			{assetLeft}
-			<input checked={checked} onChange={onChange} name={name} id={id} type="radio" />
+			<input
+				checked={checked}
+				onChange={onChange}
+				name={name}
+				id={id}
+				type="radio"
+			/>
 			<span></span>
 			{label && <label htmlFor={id}>{label}</label>}
 			{assetRight}
@@ -38,9 +41,14 @@ const RadioContainer = styled.div`
 	color: ${({ theme }) => theme.text.color};
 	position: relative;
 
+	transition: ${({ theme }) =>
+		`background-color ${theme.transition.default}, color ${theme.transition.default}`};
+
 	label {
 		display: block;
-		padding: ${({ theme }) => theme.compSpacing.y}px 0 ${({ theme }) => theme.compSpacing.y}px ${({ theme }) => theme.compSpacing.x + 8}px;
+		padding: ${({ theme }) => theme.compSpacing.y}px 0
+			${({ theme }) => theme.compSpacing.y}px
+			${({ theme }) => theme.compSpacing.x + 8}px;
 		cursor: pointer;
 		user-select: none;
 	}
@@ -49,7 +57,7 @@ const RadioContainer = styled.div`
 		position: absolute;
 		visibility: hidden;
 
-		&[type=radio]:checked ~ span {
+		&[type="radio"]:checked ~ span {
 			&:after {
 				transform: translate(-50%, -50%) scale(0.75);
 			}

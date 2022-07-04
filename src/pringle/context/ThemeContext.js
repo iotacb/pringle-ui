@@ -123,12 +123,16 @@ const themeTemplate = {
 		color: "#222",
 		color2: "#8c8c8c",
 		size: {
-			sm: 12,
-			md: 16,
-			lg: 18,
+			ty: 13,
+			sm: 16,
+			md: 18,
+			lg: 24,
 			xl: 32,
 			xl2: 64,
 			giant: 128,
+		},
+		weight: {
+			bold: "bold",
 		},
 	},
 	avatar: {
@@ -137,7 +141,7 @@ const themeTemplate = {
 		background: "#FFAE33",
 		group: {
 			gap: 12,
-		}
+		},
 	},
 	loader: {
 		width: 64,
@@ -148,7 +152,7 @@ const themeTemplate = {
 	},
 	backdrop: {
 		background: "rgba(0 0 0 / 50%)",
-		blur: 20
+		blur: 20,
 	},
 	radius: {
 		sm: 4,
@@ -263,7 +267,11 @@ ThemeProvider.propTypes = {
 	children: PropTypes.node,
 };
 
-function ThemeProvider({ theme = themeTemplate, autoBackground = true, children }) {
+function ThemeProvider({
+	theme = themeTemplate,
+	autoBackground = true,
+	children,
+}) {
 	const [themeState, setThemeState] = useState(theme);
 
 	// Change the current used theme. e.g: light to dark theme

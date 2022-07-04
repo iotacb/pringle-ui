@@ -13,6 +13,7 @@ import {
 	AvatarGroup,
 	Loader,
 	Backdrop,
+	Heading,
 	useTheme,
 	darkTheme,
 	lightTheme,
@@ -40,11 +41,9 @@ function App() {
 		"Java",
 		"Python",
 		"C#",
-		"AHHHHHHHHHHHHHHHHHHHH",
 		"Java",
 		"Python",
 		"C#",
-		"AHHHHHHHHHHHHHHHHHHHH",
 		"Java",
 		"Python",
 		"C#",
@@ -96,12 +95,19 @@ function App() {
 				label="Switch"
 			/>
 			<Dropdown label="Dropdown" id="dropdown" options={dropdownOptions} />
-			<Avatar src="https://mui.com/static/images/avatar/2.jpg">H</Avatar>
+			<Avatar src="https://mui.com/static/images/avatar/2.jpg" />
 			<AvatarGroup avatars={avatars} total={20} max={8} />
 			<Button onClick={() => setShowLoading(true)}>Show loading screen</Button>
+			<Heading size={1}>H1</Heading>
+			<Heading size={2}>H2</Heading>
+			<Heading size={3}>H3</Heading>
+			<Heading size={4}>H4</Heading>
+			<Heading size={5}>H5</Heading>
 			<Backdrop onClick={() => setShowLoading(false)} showing={showLoading}>
 				<Loader />
-				<Button onClick={() => setShowLoading(false)}>Hide loading screen</Button>
+				<Button onClick={() => setShowLoading(false)}>
+					Hide loading screen
+				</Button>
 			</Backdrop>
 		</Container>
 	);

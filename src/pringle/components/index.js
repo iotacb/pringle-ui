@@ -5,5 +5,6 @@ export { default as Navbar } from "./navbar";
 export { default as Dropdown } from "./dropdown";
 export { default as Loader } from "./loading";
 export { default as Backdrop } from "./backdrop";
+export { default as Heading } from "./typo";
 export { Avatar, AvatarGroup } from "./avatar";
 export { Range, TextField } from "./input";

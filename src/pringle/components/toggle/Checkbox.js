@@ -8,22 +8,24 @@ function Checkbox({
 	name,
 	label,
 	onChange,
-    onClick,
+	onClick,
 	assetLeft,
 	assetRight,
 	checked,
-	style
+	style,
 }) {
 	const theme = useTheme();
 
 	return (
-		<CheckboxContainer
-			style={style}
-            onClick={onClick}
-			theme={theme}
-		>
+		<CheckboxContainer style={style} onClick={onClick} theme={theme}>
 			{assetLeft}
-			<input checked={checked} onChange={onChange} name={name} id={id} type="checkbox" />
+			<input
+				checked={checked}
+				onChange={onChange}
+				name={name}
+				id={id}
+				type="checkbox"
+			/>
 			<span></span>
 			{label && <label htmlFor={id}>{label}</label>}
 			{assetRight}
@@ -40,9 +42,15 @@ const CheckboxContainer = styled.div`
 	color: ${({ theme }) => theme.text.color};
 	position: relative;
 
+	transition: ${({ theme }) =>
+		`background-color ${theme.transition.default}, color ${theme.transition.default}`};
+
 	label {
-		display: block;
-		padding: ${({ theme }) => theme.compSpacing.y}px 0 ${({ theme }) => theme.compSpacing.y}px ${({ theme }) => theme.compSpacing.x + 8}px;
+		display: flex;
+		align-items: center;
+		padding: ${({ theme }) => theme.compSpacing.y}px 0
+			${({ theme }) => theme.compSpacing.y}px
+			${({ theme }) => theme.compSpacing.x + 8}px;
 		cursor: pointer;
 		user-select: none;
 	}
@@ -51,7 +59,7 @@ const CheckboxContainer = styled.div`
 		position: absolute;
 		visibility: hidden;
 
-		&[type=checkbox]:checked ~ span {
+		&[type="checkbox"]:checked ~ span {
 			&:after {
 				transform: translate(-50%, -50%) scale(0.75);
 			}

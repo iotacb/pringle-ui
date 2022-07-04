@@ -3,7 +3,15 @@ import styled from "styled-components";
 
 import useTheme from "../../hooks/useTheme";
 
-function Navbar({ logo, links, component, navigation, scrollThreshold = 60, onOpenChange = () => {}, style }) {
+function Navbar({
+	logo,
+	links,
+	component,
+	navigation,
+	scrollThreshold = 60,
+	onOpenChange = () => {},
+	style,
+}) {
 	const theme = useTheme();
 	const [isOpen, setIsOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -33,14 +41,28 @@ function Navbar({ logo, links, component, navigation, scrollThreshold = 60, onOp
 				<div>{component}</div>
 				<LinksWrapper>
 					{links &&
-						links.map((link, index) => <LinkItem theme={theme} key={index} link={link} navigation={navigation} />)}
+						links.map((link, index) => (
+							<LinkItem
+								theme={theme}
+								key={index}
+								link={link}
+								navigation={navigation}
+							/>
+						))}
 				</LinksWrapper>
 				<BurgerItem theme={theme} onClick={handleBurgerClick} open={isOpen} />
 			</NavbarWrapper>
 			<BurgerNavbarWrapper theme={theme} open={isOpen}>
 				<BurgerNavbarItemWrapper>
 					{links &&
-						links.map((link, index) => <LinkItem theme={theme} key={index} link={link} navigation={navigation} />)}
+						links.map((link, index) => (
+							<LinkItem
+								theme={theme}
+								key={index}
+								link={link}
+								navigation={navigation}
+							/>
+						))}
 				</BurgerNavbarItemWrapper>
 			</BurgerNavbarWrapper>
 		</>
@@ -125,9 +147,19 @@ const LinkItem = ({ link, style, theme, navigation }) => (
 
 const BurgerItem = ({ onClick, open, theme }) => (
 	<BurgerItemWrapper theme={theme} onClick={onClick}>
-		<BurgerItemLine theme={theme} rotation={45} translation={[0, 14]} open={open} />
+		<BurgerItemLine
+			theme={theme}
+			rotation={45}
+			translation={[0, 14]}
+			open={open}
+		/>
 		<BurgerItemLine theme={theme} rotation={15} open={open} middle />
-		<BurgerItemLine theme={theme} rotation={-45} translation={[0, -15]} open={open} />
+		<BurgerItemLine
+			theme={theme}
+			rotation={-45}
+			translation={[0, -15]}
+			open={open}
+		/>
 	</BurgerItemWrapper>
 );
 
@@ -139,13 +171,16 @@ const NavbarWrapper = styled.div`
 	top: 0;
 	left: 0;
 	width: 100%;
-	padding: ${({ theme }) => theme.compSpacing.y * 3.2}px ${({ theme }) => theme.compSpacing.x * 3}px;
+	padding: ${({ theme }) => theme.compSpacing.y * 3.2}px
+		${({ theme }) => theme.compSpacing.x * 3}px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	z-index: 999999;
-	backdrop-filter: ${({ scrolled, theme }) => scrolled && `blur(${theme.navbar.blur}px)`};
-	background-color: ${({ scrolled, theme }) => scrolled && theme.navbar.background};
+	backdrop-filter: ${({ scrolled, theme }) =>
+		scrolled && `blur(${theme.navbar.blur}px)`};
+	background-color: ${({ scrolled, theme }) =>
+		scrolled && theme.navbar.background};
 	transition: all ${({ theme }) => theme.transition.default};
 
 	${({ style }) => style};
@@ -163,11 +198,13 @@ const LinksWrapper = styled.div`
 const LogoItemWrapper = styled.div`
 	cursor: pointer;
 	color: ${({ theme }) => theme.text.color};
+	transition: ${({ theme }) => `color ${theme.transition.default}`};
 `;
 
 const LinkItemWrapper = styled.div`
 	cursor: pointer;
 	color: ${({ theme }) => theme.text.color};
+	transition: ${({ theme }) => `color ${theme.transition.default}`};
 `;
 
 const BurgerItemWrapper = styled.div`
@@ -191,9 +228,11 @@ const BurgerItemLine = styled.div`
 	opacity: ${({ open, middle }) => open && middle && 0};
 	transform: ${({ open, rotation, translation, middle }) =>
 		open &&
-		`translate(${translation ? `${translation[0]}px, ${translation[1]}px` : "0px"}) rotateZ(${
-			rotation ? rotation : 0
-		}deg) ${(middle ? middle : false) ? "scale(.5)" : ""}`};
+		`translate(${
+			translation ? `${translation[0]}px, ${translation[1]}px` : "0px"
+		}) rotateZ(${rotation ? rotation : 0}deg) ${
+			(middle ? middle : false) ? "scale(.5)" : ""
+		}`};
 	transition: opacity 0.3s ease, transform 0.3s ease;
 `;
 
@@ -207,7 +246,8 @@ const BurgerNavbarWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	background-color: ${({ theme }) => theme.navbar.burger.background};
-	backdrop-filter: ${({ open, theme }) => open && `blur(${theme.navbar.blur / 2}px)`};
+	backdrop-filter: ${({ open, theme }) =>
+		open && `blur(${theme.navbar.blur / 2}px)`};
 	transform: ${({ open }) => !open && "translateX(100%)"};
 	transition: transform ${({ theme }) => theme.transition.default},
 		backdrop-filter ${({ theme }) => theme.transition.default};

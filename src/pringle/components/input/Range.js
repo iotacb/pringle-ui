@@ -16,7 +16,7 @@ function Range({
 	label,
 	assetLeft,
 	assetRight,
-	style
+	style,
 }) {
 	const theme = useTheme();
 	const [markPoints, setMarkPoints] = useState([]);
@@ -55,9 +55,17 @@ function Range({
 					onMouseLeave={() => setHovering(false)}
 				/>
 				<MarksContainer>
-					{markPoints && marks && markPoints.map((mark, index) => <MarkPoint theme={theme} key={index} index={mark} />)}
+					{markPoints &&
+						marks &&
+						markPoints.map((mark, index) => (
+							<MarkPoint theme={theme} key={index} index={mark} />
+						))}
 					<RangeThumb offset={offset} theme={theme} />
-					<ValueView showValue={(showValue && hovering) || alwaysShowValue} offset={offset} theme={theme}>
+					<ValueView
+						showValue={(showValue && hovering) || alwaysShowValue}
+						offset={offset}
+						theme={theme}
+					>
 						<span />
 						{offset}
 					</ValueView>
@@ -92,6 +100,8 @@ const RangeContainer = styled.div`
 	label {
 		pointer-events: none;
 		color: ${({ theme }) => theme.text.color};
+		transition: ${({ theme }) => `color ${theme.transition.default}`};
+		user-select: none;
 	}
 
 	${({ style }) => style};
@@ -141,14 +151,17 @@ const ValueView = styled.div`
 	position: absolute;
 	left: ${({ offset }) => offset}%;
 	top: -100%;
-	transform: ${({ showValue }) => `translate(-50%, -${showValue ? 50 : 20}%) scale(${showValue ? 1 : 0.5})`};
+	transform: ${({ showValue }) =>
+		`translate(-50%, -${showValue ? 50 : 20}%) scale(${showValue ? 1 : 0.5})`};
 	opacity: ${({ showValue }) => (showValue ? 1 : 0)};
 	background-color: ${({ theme }) => theme.range.valueViewBackground};
 	color: ${({ theme }) => theme.text.color};
-	padding: ${({ theme }) => theme.compSpacing.y / 3}px ${({ theme }) => theme.compSpacing.x / 2}px;
+	padding: ${({ theme }) => theme.compSpacing.y / 3}px
+		${({ theme }) => theme.compSpacing.x / 2}px;
 	border-radius: 2px;
 	border: 1px solid #222;
-	transition: opacity ${({ theme }) => theme.transition.default}, transform ${({ theme }) => theme.transition.default};
+	transition: opacity ${({ theme }) => theme.transition.default},
+		transform ${({ theme }) => theme.transition.default};
 
 	span {
 		position: absolute;

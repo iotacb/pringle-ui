@@ -8,20 +8,36 @@ function AvatarGroup({ avatars, max = 4, reverse, style }) {
 	const theme = useTheme();
 
 	return (
-		<AvatarGroupContainer style={style} theme={theme} avatars={avatars} max={max} overflow={avatars.length > max}>
+		<AvatarGroupContainer
+			style={style}
+			theme={theme}
+			avatars={avatars}
+			max={max}
+			overflow={(avatars.length > max).toString()}
+		>
 			{avatars &&
 				avatars.map((avatar, i) => (
 					<Fragment key={i}>
 						{i > max - 1 ? (
 							<>
 								{i === avatars.length - 1 && (
-									<AvatarWrapper theme={theme} z={reverse ? i : avatars.length - i} index={max + 3} key={i}>
+									<AvatarWrapper
+										theme={theme}
+										z={reverse ? i : avatars.length - i}
+										index={max + 3}
+										key={i}
+									>
 										<Avatar>+{i - (max - 1)}</Avatar>
 									</AvatarWrapper>
 								)}
 							</>
 						) : (
-							<AvatarWrapper theme={theme} z={reverse ? i : avatars.length - i} index={i} key={i}>
+							<AvatarWrapper
+								theme={theme}
+								z={reverse ? i : avatars.length - i}
+								index={i}
+								key={i}
+							>
 								<Avatar src={avatar.src} alt={avatar.alt}>
 									{avatar.children}
 								</Avatar>

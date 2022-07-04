@@ -3,7 +3,14 @@ import styled from "styled-components";
 
 import useTheme from "../../hooks/useTheme";
 
-function Dropdown({ id, name, options = ["Dropdown"], label, onChange = () => {}, style }) {
+function Dropdown({
+	id,
+	name,
+	options = ["Dropdown"],
+	label,
+	onChange = () => {},
+	style,
+}) {
 	const theme = useTheme();
 	const [isOpen, setIsOpen] = useState();
 	const [selectedValue, setSelectedValue] = useState(options[0]);
@@ -19,8 +26,20 @@ function Dropdown({ id, name, options = ["Dropdown"], label, onChange = () => {}
 	};
 
 	return (
-		<DropdownContainer style={style} open={isOpen} theme={theme} onClick={() => setIsOpen(!isOpen)}>
-			<DropdownItem open={isOpen} isSelected={true} theme={theme} label={selectedValue} />
+		<DropdownContainer
+			style={style}
+			open={isOpen}
+			theme={theme}
+			onClick={() => setIsOpen(!isOpen)}
+			id={id}
+			name={name}
+		>
+			<DropdownItem
+				open={isOpen}
+				isSelected={true}
+				theme={theme}
+				label={selectedValue}
+			/>
 			{options &&
 				isOpen &&
 				options
@@ -40,7 +59,15 @@ function Dropdown({ id, name, options = ["Dropdown"], label, onChange = () => {}
 	);
 }
 
-const DropdownItem = ({ theme, label, isSelected = false, open, isLast, index, onClick = () => {} }) => (
+const DropdownItem = ({
+	theme,
+	label,
+	isSelected = false,
+	open,
+	isLast,
+	index,
+	onClick = () => {},
+}) => (
 	<DropdownItemContainer
 		isLast={isLast}
 		onClick={onClick}
@@ -84,7 +111,9 @@ const DropdownContainer = styled.div`
 		transform: translateY(-50%) ${({ open }) => open && "rotateX(180deg)"};
 		border-left: 8px solid transparent;
 		border-right: 8px solid transparent;
-		border-top: 8px solid ${({ theme, open }) => (open ? theme.colors.primary[500] : theme.dropdown.border)};
+		border-top: 8px solid
+			${({ theme, open }) =>
+				open ? theme.colors.primary[500] : theme.dropdown.border};
 		transition: all ${({ theme }) => theme.transition.default};
 	}
 
@@ -100,14 +129,21 @@ const DropdownItemContainer = styled.div`
 	top: ${({ isSelected, index }) => (isSelected ? 0 : (index + 1) * 100)}%;
 	padding: ${({ isSelected, theme }) =>
 		isSelected
-			? `${theme.compSpacing.y}px ${theme.compSpacing.x * 2}px ${theme.compSpacing.y}px ${theme.compSpacing.x}px`
+			? `${theme.compSpacing.y}px ${theme.compSpacing.x * 2}px ${
+					theme.compSpacing.y
+			  }px ${theme.compSpacing.x}px`
 			: `${theme.compSpacing.y}px ${theme.compSpacing.x}px`};
 	background-color: ${({ theme }) => theme.dropdown.mainBackground};
 	border-left: 1px solid ${({ theme }) => theme.dropdown.border};
 	border-right: 1px solid ${({ theme }) => theme.dropdown.border};
 	border-bottom: ${({ isLast, isSelected, open, theme }) =>
 		(isLast || (isSelected && !open)) && `1px solid ${theme.dropdown.border}`};
-	border-top: ${({ isSelected, theme }) => isSelected && `1px solid ${theme.dropdown.border}`};
+	border-top: ${({ isSelected, theme }) =>
+		isSelected && `1px solid ${theme.dropdown.border}`};
+	display: flex;
+	align-items: center;
+	transition: ${({ theme }) =>
+		`background-color ${theme.transition.default}, color ${theme.transition.default}`};
 
 	&:hover {
 		background-color: ${({ theme }) => theme.dropdown.hover.mainBackground};
